@@ -34,7 +34,7 @@ class Organization(models.Model):
 
 class OrgCharge(models.Model):
     OID = models.ForeignKey(Organization, on_delete=models.PROTECT, null=True)
-    SID = models.ManyToManyField(Student)
+    SID = models.ForeignKey(Student, on_delete=models.PROTECT, null=True)
     SDUTY = models.CharField(max_length=32, null=True)
     OTIME = models.DateField(default=django.utils.timezone.now, null=False)
 
@@ -44,7 +44,7 @@ class OrgCharge(models.Model):
 
 class OrgStu(models.Model):
     OID = models.ForeignKey(Organization, on_delete=models.PROTECT, null=True)
-    SID = models.ManyToManyField(Student)
+    SID = models.ForeignKey(Student, on_delete=models.PROTECT, null=True)
     OTIME = models.DateField(default=django.utils.timezone.now, null=False)
 
     class Meta:
@@ -62,7 +62,7 @@ class Notice(models.Model):
 
 class NoticeStu(models.Model):
     NID = models.ForeignKey(Notice, on_delete=models.PROTECT, null=True)
-    SID = models.ManyToManyField(Student)
+    SID = models.ForeignKey(Student, on_delete=models.PROTECT, null=True)
     NISREAD = models.BooleanField(default=False, null=False)
 
     class Meta:

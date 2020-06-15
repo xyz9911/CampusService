@@ -21,5 +21,5 @@ import StuOrg.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/', Market.views.index),
-    path('hi/',StuOrg.views.hi)
+    path('hi/', StuOrg.views.hi)
 ]
