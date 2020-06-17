@@ -19,6 +19,7 @@ class StudentInfo(models.Model):
     SADDRESS = models.CharField(max_length=32, null=True)
     SRATING = models.IntegerField(default=0, null=True)
 
+
     class Meta:
         app_label = "StuOrg"
 
