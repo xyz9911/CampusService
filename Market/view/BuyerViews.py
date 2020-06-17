@@ -144,21 +144,6 @@ def show_read_notices(request):
     return JsonResponse(response)
 
 
-@require_http_methods(["POST"])
-def post_notice(request):
-    response = {}
-    try:
-        sid = int(request.POST.get('sid'))
-        ncontent = str(request.POST.get('ncontent'))
-        buyer_service.insert_notice(sid, ncontent)
-        response['msg'] = 'success'
-        response['error_num'] = 0
-    except Exception as e:
-        response['msg'] = str(e)
-        response['error_num'] = 1
-    return JsonResponse(response)
-
-
 @require_http_methods(["GET"])
 def show_notice(request):
     response = {}

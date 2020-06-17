@@ -12,7 +12,6 @@ urlpatterns = [
     url(r'^show_buyer_history$', BuyerViews.show_buyer_history),
     url(r'^show_unread_notices$', BuyerViews.show_unread_notices),
     url(r'^show_read_notices$', BuyerViews.show_read_notices),
-    url(r'^post_notice$', BuyerViews.post_notice),
     url(r'^show_notice$', BuyerViews.show_notice),
     url(r'^read_notice$', BuyerViews.read_notice),
 
@@ -31,4 +30,5 @@ urlpatterns = [
     url(r'^confirm_transaction$', SellerViews.confirm_transaction),
     url(r'^show_selling_commodities$', SellerViews.show_selling_commodities),
     url(r'^show_sold_commodities$', SellerViews.show_sold_commodities),
+    url(r'^post_notice$', SellerViews.post_notice),
 ]

@@ -44,6 +44,13 @@ class StuStarsDAO(BaseDAO):
             coms.append(obj.commodity)
         return coms
 
+    def get_starred(self,cid):
+        com = self.comDAO.get_commodity(cid)
+        if not com:
+            raise Exception("commodity not found")
+        param = {"commodity": com}
+        return self.find_queryset(param,{},[])
+
     def get_stars_count(self, cid):
         com = self.comDAO.get_commodity(cid)
         if not com:

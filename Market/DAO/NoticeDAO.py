@@ -14,6 +14,9 @@ class NoticeDAO(BaseDAO):
     def add_notice(self, notice):
         return self.save(notice)
 
+    def add_notices(self, notices):
+        return self.save_batch(notices)
+
     def get_read_notice(self, student):
         param = {"student": student, "NISREAD": True}
         order = ["NDATE"]

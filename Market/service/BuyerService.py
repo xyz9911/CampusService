@@ -109,15 +109,6 @@ class BuyerService:
             raise Exception("student not found")
         return self.noticeDAO.get_read_notice(stu)
 
-    def insert_notice(self, sid, ncontent):
-        stu = self.stuDAO.get_student(sid)
-        if not stu:
-            raise Exception("student not found")
-        notice = Notice()
-        notice.student = stu
-        notice.NCONTENT = ncontent
-        return self.noticeDAO.add_notice(notice)
-
     def get_notice(self, nid):
         notice = self.noticeDAO.get_notice(nid)
         if not notice:
