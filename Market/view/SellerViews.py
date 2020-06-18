@@ -33,8 +33,8 @@ def post_commodity_info(request):
     response = {}
     try:
         cid = int(request.POST.get('cid'))
-        quantity = str(request.POST.get('quantity'))
-        description = str(request.POST.get('description'))
+        quantity = str(request.POST.get('cquantity'))
+        description = str(request.POST.get('cdescription'))
         seller_service.post_commodity_info(cid, quantity, description)
         response['msg'] = 'success'
         response['error_num'] = 0
@@ -66,8 +66,8 @@ def update_commodity_info(request):
     response = {}
     try:
         cid = int(request.POST.get('cid'))
-        quantity = int(request.POST.get('quantity'))
-        description = str(request.POST.get('description'))
+        quantity = int(request.POST.get('cquantity'))
+        description = str(request.POST.get('cdescription'))
         seller_service.update_commodity_info(cid, quantity, description)
         response['msg'] = 'success'
         response['error_num'] = 0

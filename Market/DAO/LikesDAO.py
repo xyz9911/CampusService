@@ -28,9 +28,8 @@ class StuStarsDAO(BaseDAO):
         com = self.comDAO.get_commodity(cid)
         if not com:
             raise Exception("commodity not found")
-        star = StuStars()
-        star.student = stu
-        star.commodity = com
+        param = {"student": stu,"commodity": com}
+        star=self.find_one(param,{},[])
         return self.delete(star)
 
     def get_all_stars(self, sid):
@@ -65,9 +64,8 @@ class StuStarsDAO(BaseDAO):
         com = self.comDAO.get_commodity(cid)
         if not com:
             raise Exception("commodity not found")
-        param1 = {"student": stu}
-        param2 = {"commodity": com}
-        return self.is_exists(param1, param2)
+        param = {"student": stu,"commodity": com}
+        return self.is_exists(param,{})
 
 
 class StuLikesDAO(BaseDAO):
@@ -94,9 +92,8 @@ class StuLikesDAO(BaseDAO):
         com = self.comDAO.get_commodity(cid)
         if not com:
             raise Exception("commodity not found")
-        like = StuLikes()
-        like.student = stu
-        like.commodity = com
+        param = {"student": stu,"commodity": com}
+        like=self.find_one(param,{},[])
         return self.delete(like)
 
     def get_likes_count(self, cid):
@@ -111,6 +108,5 @@ class StuLikesDAO(BaseDAO):
         com = self.comDAO.get_commodity(cid)
         if not com:
             raise Exception("commodity not found")
-        param1 = {"student": stu}
-        param2 = {"commodity": com}
-        return self.is_exists(param1, param2)
+        param = {"student": stu,"commodity": com}
+        return self.is_exists(param, {})

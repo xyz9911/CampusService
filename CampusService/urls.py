@@ -20,6 +20,6 @@ import Market.urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^api/', include(Market.urls)),
+    url(r'^mar/', include(Market.urls)),
     # path('hi/', )
 ]

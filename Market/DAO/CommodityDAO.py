@@ -32,7 +32,7 @@ class CommodityDAO(BaseDAO):
         stu = self.stuDAO.get_student(sid)
         param1 = {"student": stu,"CISSOLD":cissold}
         param2 = {"is_delete": True}
-        return self.find_queryset(param1, param2)
+        return self.find_queryset(param1, param2,[])
 
 
 class CommodityInfoDAO(BaseDAO):

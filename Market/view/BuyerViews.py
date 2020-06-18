@@ -33,7 +33,7 @@ def show_student_info(request):
     try:
         sid = int(request.GET.get('sid'))
         info = buyer_service.get_student_info(sid)
-        response['info'] = {"sid": sid, "saddress": info.SADDRESS, "savatar": info.SAVATAR, "smajor": info.SNICKNAME,
+        response['info'] = {"sid": sid,"snickname":info.SNICKNAME, "saddress": info.SADDRESS, "savatar": info.SAVATAR, "smajor": info.SMAJOR,
                             "srating": info.SRATING, "ssex": info.SSEX, "sqq": info.SQQ, "stel": info.STEL}
         # response['info'] = json.loads(serializers.serialize("json", info))
         response['msg'] = 'success'
@@ -90,7 +90,9 @@ def update_student_info(request):
         ssex = bool(request.POST.get('ssex'))
         smajor = str(request.POST.get('smajor'))
         saddress = str(request.POST.get('saddress'))
-        buyer_service.update_student_info(sid, snickname, savatar, ssex, smajor, saddress)
+        sqq = str(request.POST.get('sqq'))
+        stel = str(request.POST.get('stel'))
+        buyer_service.update_student_info(sid, snickname, savatar, ssex, smajor, saddress,sqq,stel)
         response['msg'] = 'success'
         response['error_num'] = 0
     except Exception as e:
@@ -105,7 +107,7 @@ def show_buyer_history(request):
     try:
         sid = int(request.GET.get('sid'))
         history = buyer_service.get_buyer_history(sid)
-        response['info'] = json.loads(serializers.serialize("json", history))
+        response['info'] = history
         response['msg'] = 'success'
         response['error_num'] = 0
     except Exception as e:

@@ -95,7 +95,10 @@ class BuyerService:
         stu = self.stuDAO.get_student(sid)
         if not stu:
             raise Exception("student not found")
-        return self.hisDAO.get_buyer_history(sid)
+        result=self.hisDAO.get_buyer_history(sid)
+        list=[]
+        for obj in result:
+            list.append({"cid":obj.commodity.id,"cname":obj.commodity.CNAME,"cprice":obj.commodity.CPRICE,"cimage":obj.commodity.CIMAGE,"hdate":obj.HDATE})
 
     def get_unread_notice(self, sid):
         stu = self.stuDAO.get_student(sid)

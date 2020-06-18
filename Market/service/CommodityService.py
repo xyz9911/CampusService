@@ -54,18 +54,22 @@ class CommodityService:
         if not com:
             raise Exception("commodity not found")
         info = self.comInfoDAO.get_info(cid)
-        if not info:
-            raise Exception("info not found")
+        quantity=0;des=""
+        found=False
+        if info:
+            quantity=info.CQUANTITY
+            des=info.CDESCRIPTION
+            found=True
         stu_info = self.stuInfoDAO.get_info(com.student.id)
         stars = self.starDAO.get_stars_count(cid)
         likes = self.likeDAO.get_likes_count(cid)
         return {"cid": com.id, "snickname": stu_info.SNICKNAME, "savatar": stu_info.SAVATAR,
                 "saddress": stu_info.SADDRESS, "srating": stu_info.SRATING,
-                "sqq": stu_info.SQQ, "STEL": stu_info.STEL,
+                "sqq": stu_info.SQQ, "stel": stu_info.STEL,
                 "cname": com.CNAME, "cimage": com.CIMAGE, "cprice": com.CPRICE, "cdate": com.CDATE,
-                "cquantity": info.CQUANTITY, "cdescription": info.CDESCRIPTION,
+                "cquantity": quantity, "cdescription": des,
                 "clikes": likes, "stars": stars, "liked": self.check_like_status(com.student.id, cid),
-                "stared": self.check_star_status(com.student.id, cid)}
+                "stared": self.check_star_status(com.student.id, cid),"infoadded":found}
 
     def rate_commodity(self, sid, cid, rating):
         if not self.hisDAO.get_history_by_stu_and_com(sid, cid):
