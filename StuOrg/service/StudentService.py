@@ -1,4 +1,4 @@
-from ..DAO.StudentDAO import *
+from ..DAO.OrgDAO import *
 
 
 class StudentService:

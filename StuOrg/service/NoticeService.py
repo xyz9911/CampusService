@@ -1,4 +1,5 @@
 from ..DAO.NoticeDAO import *
+from ..DAO.OrgDAO import *
 
 
 class NoticeService:

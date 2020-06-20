@@ -1,6 +1,6 @@
 from .BaseDAO import BaseDAO
 from ..models import *
-from .StudentDAO import *
+from .OrgDAO import *
 
 
 class NoticeDAO(BaseDAO):
