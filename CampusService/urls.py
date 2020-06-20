@@ -17,9 +17,11 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.urls import path
 import Market.urls
+import StuOrg.urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^mar/', include(Market.urls)),
+    url(r'^org/', include(StuOrg.urls)),
     # path('hi/', )
 ]
