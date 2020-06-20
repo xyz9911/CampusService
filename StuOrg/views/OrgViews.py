@@ -27,10 +27,11 @@ def post_org(request):
 def update_org(request):
     response = {}
     try:
+        oid = int(request.POST.get('oid'))
         oname = int(request.POST.get('oname'))
         oimage = str(request.POST.get('oimage'))
         odes = str(request.POST.get('odes'))
-        org_service.update_org(oname, oimage, odes)
+        org_service.update_org(oid, oname, oimage, odes)
         response['msg'] = 'success'
         response['error_num'] = 0
     except Exception as e:
