@@ -23,9 +23,9 @@ class CommodityDAO(BaseDAO):
         return self.find_queryset({}, param, order)
 
     def get_commodities_view(self):
-        param = {"CISSOLD": True, "is_delete": True}
+        param = {"CISSOLD": False, "is_delete": False}
         order = ["CDATE"]
-        res = self.MODEL_CLASS.objects.filter().exclude(**param).order_by(*order)
+        res = self.find_queryset(param,{},order)
         return res
 
     def get_commodities_by_seller(self, sid,cissold):

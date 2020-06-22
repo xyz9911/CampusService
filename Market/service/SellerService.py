@@ -12,7 +12,7 @@ class SellerService:
         self.comDAO = CommodityDAO()
         self.infoDAO = CommodityInfoDAO()
         self.historyDAO = HistoryDAO()
-        self.starsDAO=StuStarsDAO()
+        self.starsDAO = StuStarsDAO()
         self.noticeDAO = NoticeDAO()
 
     def post_commodity(self, sid, name, image, price):
@@ -40,12 +40,12 @@ class SellerService:
             com.CNAME = name
             com.CIMAGE = image
             com.CPRICE = price
-        stars=self.starsDAO.get_starred(cid)
-        notices=[]
-        notice=Notice()
+        stars = self.starsDAO.get_starred(cid)
+        notices = []
+        notice = Notice()
         for obj in stars:
-            notice.student=obj.student
-            notice.NCONTENT="你关注的商品有了新动态"
+            notice.student = obj.student
+            notice.NCONTENT = "你关注的商品:" + name + "有了新动态"
             notices.append(notice)
         self.noticeDAO.add_notices(notices)
         return self.comDAO.update_commodity(com)

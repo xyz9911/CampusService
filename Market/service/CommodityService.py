@@ -17,10 +17,16 @@ class CommodityService:
         self.ratingDAO = RatingDAO()
 
     def star_or_unstar_commodity(self, sid, cid, star_or_unstar):
+        com = self.comDAO.get_commodity(cid)
+        info = com.commodityinfo
         if star_or_unstar:
+            info.CSTARS = info.CSTARS + 1
+            self.comInfoDAO.update_info(info)
             return self.starDAO.add_star(sid, cid)
 
         else:
+            info.CSTARS = info.CSTARS - 1
+            self.comInfoDAO.update_info(info)
             return self.starDAO.remove_star(sid, cid)
 
     def get_starred_commodity(self, sid):
@@ -30,10 +36,16 @@ class CommodityService:
         return self.starDAO.is_starred(sid, cid)
 
     def like_or_unlike_commodity(self, sid, cid, like_or_unlike):
+        com = self.comDAO.get_commodity(cid)
+        info = com.commodityinfo
         if like_or_unlike:
+            info.CLIKES = info.CLIKES + 1
+            self.comInfoDAO.update_info(info)
             return self.likeDAO.add_like(sid, cid)
 
         else:
+            info.CLIKES = info.CLIKES - 1
+            self.comInfoDAO.update_info(info)
             return self.likeDAO.remove_like(sid, cid)
 
     def check_like_status(self, sid, cid):
@@ -49,17 +61,18 @@ class CommodityService:
 
         return paginator.page(pindex)
 
-    def view_commodity_info(self, cid):
+    def view_commodity_info(self, cid, sid):
         com = self.comDAO.get_commodity(cid)
         if not com:
             raise Exception("commodity not found")
         info = self.comInfoDAO.get_info(cid)
-        quantity=0;des=""
-        found=False
+        quantity = 0;
+        des = ""
+        found = False
         if info:
-            quantity=info.CQUANTITY
-            des=info.CDESCRIPTION
-            found=True
+            quantity = info.CQUANTITY
+            des = info.CDESCRIPTION
+            found = True
         stu_info = self.stuInfoDAO.get_info(com.student.id)
         stars = self.starDAO.get_stars_count(cid)
         likes = self.likeDAO.get_likes_count(cid)
@@ -68,8 +81,8 @@ class CommodityService:
                 "sqq": stu_info.SQQ, "stel": stu_info.STEL,
                 "cname": com.CNAME, "cimage": com.CIMAGE, "cprice": com.CPRICE, "cdate": com.CDATE,
                 "cquantity": quantity, "cdescription": des,
-                "clikes": likes, "stars": stars, "liked": self.check_like_status(com.student.id, cid),
-                "stared": self.check_star_status(com.student.id, cid),"infoadded":found}
+                "clikes": likes, "stars": stars, "liked": self.check_like_status(sid, cid),
+                "stared": self.check_star_status(sid, cid), "infoadded": found}
 
     def rate_commodity(self, sid, cid, rating):
         if not self.hisDAO.get_history_by_stu_and_com(sid, cid):

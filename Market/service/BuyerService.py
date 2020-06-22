@@ -99,6 +99,7 @@ class BuyerService:
         list=[]
         for obj in result:
             list.append({"cid":obj.commodity.id,"cname":obj.commodity.CNAME,"cprice":obj.commodity.CPRICE,"cimage":obj.commodity.CIMAGE,"hdate":obj.HDATE})
+        return list
 
     def get_unread_notice(self, sid):
         stu = self.stuDAO.get_student(sid)

@@ -2,6 +2,9 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 from .models import *
+from django.core import serializers
+from django.http import JsonResponse
+import json
 
 
 @require_http_methods(["POST"])
@@ -31,8 +34,11 @@ def stu_ban(request):
     try:
         sid = int(request.POST.get('sid'))
         stu = Student.objects.get(id=sid)
-        stu.SISVALID = False
-        stu.save(stu)
+        if stu.SISVALID:
+            stu.SISVALID = False
+        else:
+            stu.SISVALID = True
+        stu.save()
         # response['info'] = json.loads(serializers.serialize("json", info))
         response['msg'] = 'success'
         response['error_num'] = 0
@@ -58,6 +64,23 @@ def admin_login(request):
         response['error_num'] = 0
     except Exception as e:
         response['info'] = {"code": 100}
+        response['msg'] = str(e)
+        response['error_num'] = 1
+    return JsonResponse(response)
+
+
+@require_http_methods(["GET"])
+def show_all_stus(request):
+    response = {}
+    try:
+        stus = Student.objects.filter()
+        res = []
+        for item in stus:
+            res.append({"sid": item.id, "sname": item.SNAME, "sisvalid": item.SISVALID})
+        response['info'] = res
+        response['msg'] = 'success'
+        response['error_num'] = 0
+    except Exception as e:
         response['msg'] = str(e)
         response['error_num'] = 1
     return JsonResponse(response)

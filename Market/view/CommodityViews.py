@@ -156,7 +156,8 @@ def show_commodity_info(request):
     response = {}
     try:
         cid = int(request.GET.get('cid'))
-        info = com_service.view_commodity_info(cid)
+        sid = int(request.GET.get('sid'))
+        info = com_service.view_commodity_info(cid,sid)
         response['info'] = info
         response['msg'] = 'success'
         response['error_num'] = 0

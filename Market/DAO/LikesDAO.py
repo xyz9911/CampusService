@@ -109,4 +109,5 @@ class StuLikesDAO(BaseDAO):
         if not com:
             raise Exception("commodity not found")
         param = {"student": stu,"commodity": com}
+        obj=self.find_one(param,{},[])
         return self.is_exists(param, {})
