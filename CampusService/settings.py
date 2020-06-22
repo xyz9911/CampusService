@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Market',
-    'StuOrg'
+    'StuOrg',
+    'login'
 ]
 
 MIDDLEWARE = [
@@ -107,7 +108,8 @@ DATABASE_ROUTERS = ['CampusService.router.DatabaseAppsRouter']
 
 DATABASE_APPS_MAPPING = {
     'Market': 'CampusMarket',
-    'StuOrg': 'StuOrganization'
+    'StuOrg': 'StuOrganization',
+    # 'login': 'default'
 }
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

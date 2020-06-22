@@ -11,7 +11,7 @@ org_service = OrgService()
 def post_org(request):
     response = {}
     try:
-        oname = int(request.POST.get('oname'))
+        oname = str(request.POST.get('oname'))
         oimage = str(request.POST.get('oimage'))
         odes = str(request.POST.get('odes'))
         org_service.add_org(oname, oimage, odes)
@@ -122,6 +122,20 @@ def update_stu_charge(request):
         sid = str(request.POST.get('sid'))
         sduty = str(request.POST.get('sduty'))
         org_service.update_charge(oid, sid, sduty)
+        response['msg'] = 'success'
+        response['error_num'] = 0
+    except Exception as e:
+        response['msg'] = str(e)
+        response['error_num'] = 1
+    return JsonResponse(response)
+
+
+@require_http_methods(["GET"])
+def show_orgs_by_stu(request):
+    response = {}
+    try:
+        sid = int(request.GET.get('sid'))
+        response['info'] = org_service.find_org_by_stu(sid)
         response['msg'] = 'success'
         response['error_num'] = 0
     except Exception as e:

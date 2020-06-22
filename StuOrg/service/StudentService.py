@@ -58,7 +58,7 @@ class StudentService:
         return self.stuOrgDAO.find_students(oid)
 
     def find_orgs_of_students(self, sid):
-        return self.stuOrgDAO.find_students(sid)
+        return self.stuOrgDAO.find_orgs(sid)
 
     def is_member(self, oid, sid):
         return self.stuOrgDAO.stu_exists(oid, sid)

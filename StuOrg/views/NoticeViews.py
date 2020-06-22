@@ -28,7 +28,7 @@ def show_notice(request):
     try:
         nid = int(request.GET.get('nid'))
         notice = notice_service.find_notice(nid)
-        response['info'] = json.loads(serializers.serialize("json", notice))
+        response['info'] = {"nid":notice.id,"ncontent":notice.NCONTENT,"ntime":notice.NTIME}
         response['msg'] = 'success'
         response['error_num'] = 0
     except Exception as e:
@@ -71,7 +71,7 @@ def show_notice_by_org(request):
     response = {}
     try:
         oid = int(request.GET.get('oid'))
-        notices = notice_service.find_notice_by_org()
+        notices = notice_service.find_notice_by_org(oid)
         response['info'] = notices
         response['msg'] = 'success'
         response['error_num'] = 0

@@ -57,7 +57,7 @@ def show_student(request):
     try:
         sid = int(request.GET.get('sid'))
         stu = stu_service.find_student(sid)
-        response['info'] = json.loads(serializers.serialize("json", stu))
+        response['info'] = {"sid":stu.id,"sname":stu.SNAME}
         response['msg'] = 'success'
         response['error_num'] = 0
     except Exception as e:
@@ -106,7 +106,7 @@ def show_student_info(request):
     try:
         sid = int(request.GET.get('sid'))
         info = stu_service.find_info(sid)
-        response['info'] = json.loads(serializers.serialize("json", info))
+        response['info'] = {"ssex":info.SSEX,"smajor":info.SMAJOR,"sintro":info.SINTRO}
         response['msg'] = 'success'
         response['error_num'] = 0
     except Exception as e:

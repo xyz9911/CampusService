@@ -14,10 +14,13 @@ class NoticeService:
         org = self.orgDAO.find_org(oid)
         students = self.stuOrgDAO.find_students_raw(oid)
         chargers = self.orgChargeDAO.find_charge_by_org_raw(oid)
-        id = self.noticeDAO.add_notice(oid, ncontent)
+        notice = self.noticeDAO.add_notice(oid, ncontent)
         relations = []
-        for obj in students, chargers:
-            notice_stu = NoticeStu(notice_id=id,student=obj)
+        for obj in students:
+            notice_stu = NoticeStu(notice=notice,student=obj)
+            relations.append(notice_stu)
+        for obj in chargers:
+            notice_stu = NoticeStu(notice=notice,student=obj)
             relations.append(notice_stu)
         if not self.noticeStuDAO.add_relation_batch(relations):
             raise Exception("input error")

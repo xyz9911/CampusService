@@ -13,7 +13,7 @@ class NoticeDAO(BaseDAO):
         org = self.orgDAO.find_org(oid)
         notice = Notice(organization=org, NCONTENT=ncontent)
         self.save(notice)
-        return notice.id
+        return notice
 
     def find_notice(self, nid):
         param = {"id": nid}
@@ -68,8 +68,9 @@ class NoticeStuDAO(BaseDAO):
         res = self.find_queryset(param, {}, [])
         notices = []
         for obj in res:
-            org = obj.organization
-            notices.append({"nid": obj.id, "oid": org.id, "oname": org.ONAME, "oimage": org.OIMAGE, "ntime": obj.NTIME})
+            notice=obj.notice
+            org = notice.organization
+            notices.append({"nid": notice.id, "oid": org.id, "oname": org.ONAME, "oimage": org.OIMAGE,"ncontent":notice.NCONTENT,"ntime": notice.NTIME})
         return notices
 
     def add_relation_batch(self, relations):

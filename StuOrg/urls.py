@@ -35,5 +35,6 @@ urlpatterns = [
     url(r'^add_stu_as_charge$', add_stu_as_charge),
     url(r'^remove_stu_as_charge$', remove_stu_as_charge),
     url(r'^update_stu_charge$', update_stu_charge),
+    url(r'^show_orgs_by_stu$', show_orgs_by_stu),
     url(r'^show_orgs_charges$', show_orgs_charges),
 ]

@@ -12,7 +12,7 @@ class OrgDAO(BaseDAO):
 
     def find_org(self, oid):
         param = {"id": oid}
-        return self.find_one(param)
+        return self.find_one(param, {}, [])
 
     def remove_org(self, oid):
         org = self.find_org(oid)
@@ -84,7 +84,19 @@ class OrgChargeDAO(BaseDAO):
         stu = self.stuDAO.find_student(sid)
         org = self.orgDAO.find_org(oid)
         param = {"student": stu, "organization": org}
-        return self.is_exists(param, {}, [])
+        return self.is_exists(param, {})
+
+    def find_orgs(self, sid):
+        stu = self.stuDAO.find_student(sid)
+        if not stu:
+            raise Exception("student not found")
+        param = {"student": stu}
+        relations = self.find_queryset(param, {}, [])
+        orgs = []
+        for obj in relations:
+            org = obj.organization
+            orgs.append({"oid": org.id, "oname": org.ONAME, "oimage": org.OIMAGE, "odescription": org.ODESCRIPTION})
+        return orgs
 
 
 class StuOrgDAO(BaseDAO):
@@ -129,7 +141,8 @@ class StuOrgDAO(BaseDAO):
             stu = obj.student
             info = stu.studentinfo
             students.append(
-                {"sid": stu.id, "sname": stu.SNAME, "ssex": info.SSEX, "smajor": info.SMAJOR, "sintro": info.SINTRO})
+                {"sid": stu.id, "sname": stu.SNAME, "ssex": info.SSEX, "smajor": info.SMAJOR, "sintro": info.SINTRO,
+                 "otime": obj.OTIME})
         return students
 
     def find_students_raw(self, oid):

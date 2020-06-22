@@ -42,7 +42,10 @@ class StudentInfoDAO(BaseDAO):
         stu = self.stuDAO.find_student(sid)
         if not stu:
             raise Exception("student not found")
-        info = StudentInfo(student=stu, SSEX=ssex, SMAJOR=smajor, SINTRO=sintro)
+        info = self.find_info(sid)
+        info.SSEX=ssex
+        info.SMAJOR=smajor
+        info.SINTRO=sintro
         return self.save(info)
 
     def find_info(self, sid):

@@ -152,7 +152,7 @@ def show_notice(request):
     try:
         nid = int(request.GET.get('nid'))
         notice = buyer_service.get_notice(nid)
-        response['info'] = json.loads(serializers.serialize("json", notice))
+        response['info'] = {"nid":nid,"ncontent":notice.NCONTENT,"ndate":notice.NDATE}
         response['msg'] = 'success'
         response['error_num'] = 0
     except Exception as e:

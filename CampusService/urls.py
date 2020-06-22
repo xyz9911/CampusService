@@ -18,10 +18,12 @@ from django.contrib import admin
 from django.urls import path
 import Market.urls
 import StuOrg.urls
+import login.urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^mar/', include(Market.urls)),
     url(r'^org/', include(StuOrg.urls)),
+    url(r'^log/', include(login.urls)),
     # path('hi/', )
 ]

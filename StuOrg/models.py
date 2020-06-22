@@ -26,7 +26,7 @@ class StudentInfo(models.Model):
 class Organization(models.Model):
     id = models.AutoField(primary_key=True)
     ONAME = models.CharField(max_length=32, null=True)
-    OIMAGE=models.CharField(max_length=32, null=True)
+    OIMAGE=models.CharField(max_length=255, null=True)
     ODESCRIPTION = models.CharField(max_length=255, null=True)
 
     class Meta:

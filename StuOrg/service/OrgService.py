@@ -42,5 +42,8 @@ class OrgService:
             raise Exception("update error")
         return True
 
+    def find_org_by_stu(self,sid):
+        return self.orgChargeDAO.find_orgs(sid)
+
     def find_charge_by_org(self, oid):
         return self.orgChargeDAO.find_charge_by_org(oid)
